@@ -17,3 +17,11 @@
         END
 
 {%endmacro%}
+{%macro get_daytype(x)%}
+        CASE 
+            WHEN DAYNAME(TRY_TO_TIMESTAMP({{x}})) IN ('Sat','Sun')
+            THEN 'Weekend'
+            ELSE 'Businessday'
+        END
+
+{%endmacro%}

@@ -4,11 +4,7 @@ WITH CTE AS
         TRY_TO_TIMESTAMP(STARTED_AT) AS STARTED_AT,
         DATE(TRY_TO_TIMESTAMP(STARTED_AT)) AS DATE_STARTED_AT,
         HOUR(TRY_TO_TIMESTAMP(STARTED_AT)) AS HOUR_STARTED_AT,
-        CASE 
-            WHEN DAYNAME(TRY_TO_TIMESTAMP(STARTED_AT)) IN ('Sat','Sun')
-            THEN 'Weekend'
-            ELSE 'Businessday'
-        END AS DAY_TYPE,
+        {{get_daytype('STARTED_AT')}} AS DAY_TYPE,
         {{get_season('STARTED_AT')}} AS SEASON_TYPE,
         {{function1('STARTED_AT')}}  AS PastorFuture
 
