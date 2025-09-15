@@ -9,15 +9,8 @@ WITH CTE AS
             THEN 'Weekend'
             ELSE 'Businessday'
         END AS DAY_TYPE,
-        CASE 
-            WHEN MONTH(TRY_TO_TIMESTAMP(STARTED_AT)) IN ('12','1','2')
-            THEN 'Winter'
-            WHEN MONTH(TRY_TO_TIMESTAMP(STARTED_AT)) IN ('3','4','5')
-            THEN 'Spring'
-            WHEN MONTH(TRY_TO_TIMESTAMP(STARTED_AT)) IN ('6','7','8')
-            THEN 'Summer'
-            ELSE 'Autumn'
-        END AS Season_Type    
+        {{get_season('STARTED_AT')}} AS SEASON_TYPE,
+        {{function1('STARTED_AT')}}  AS PastorFuture
 
     from
     {{source('demo','bike')}}
