@@ -9,7 +9,7 @@ WITH CTE AS
         {{function1('STARTED_AT')}}  AS PastorFuture
 
     from
-    {{source('demo','bike')}}
+    {{ ref('stg_bike') }}
     where STARTED_AT!='started_at'
 )
 select * from CTE
