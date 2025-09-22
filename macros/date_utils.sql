@@ -1,5 +1,5 @@
 {%macro function1 (x)%}
-    CASE WHEN TRY_TO_TIMESTAMP({{x}}) < CURRENT_DATE
+    CASE WHEN TO_TIMESTAMP({{x}}) < CURRENT_DATE
         THEN 'PAST'
         ELSE 'FUTURE'
     END
@@ -7,11 +7,11 @@
 
 {%macro get_season(x)%}
     CASE 
-            WHEN MONTH(TRY_TO_TIMESTAMP({{x}})) IN ('12','1','2')
+            WHEN MONTH(TO_TIMESTAMP({{x}})) IN ('12','1','2')
             THEN 'Winter'
-            WHEN MONTH(TRY_TO_TIMESTAMP({{x}})) IN ('3','4','5')
+            WHEN MONTH(TO_TIMESTAMP({{x}})) IN ('3','4','5')
             THEN 'Spring'
-            WHEN MONTH(TRY_TO_TIMESTAMP({{x}})) IN ('6','7','8')
+            WHEN MONTH(TO_TIMESTAMP({{x}})) IN ('6','7','8')
             THEN 'Summer'
             ELSE 'Autumn'
         END
@@ -19,7 +19,7 @@
 {%endmacro%}
 {%macro get_daytype(x)%}
         CASE 
-            WHEN DAYNAME(TRY_TO_TIMESTAMP({{x}})) IN ('Sat','Sun')
+            WHEN DAYNAME(TO_TIMESTAMP({{x}})) IN ('Sat','Sun')
             THEN 'Weekend'
             ELSE 'Businessday'
         END
